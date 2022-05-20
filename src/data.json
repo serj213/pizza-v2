@@ -1,0 +1,45 @@
+[
+{
+    "id": 0,
+    "name": "Мексиканская",
+    "img": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg",
+    "price": 345,
+    "types": [0, 1],
+    "category": 0,
+    "size": [26, 30, 40],
+    "rating": 4
+    },
+
+    {
+    "id": 1,
+    "name": "Чилийская",
+    "img": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg",
+    "price": 345,
+    "types": [0, 1],
+    "category": 0,
+    "size": [26, 30, 40],
+    "rating": 4
+    },
+
+    {
+    "id": 2,
+    "name": "Русская",
+    "img": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg",
+    "price": 345,
+    "types": [0, 1],
+    "category": 0,
+    "size": [26, 30, 40],
+    "rating": 4
+    },
+
+    {
+    "id": 3,
+    "name": "Бельгийская",
+    "img": "https://dodopizza-a.akamaihd.net/static/Img/Products/Pizza/ru-RU/b750f576-4a83-48e6-a283-5a8efb68c35d.jpg",
+    "price": 345,
+    "types": [0, 1],
+    "category": 0,
+    "size": [26, 30, 40],
+    "rating": 4
+    }
+]

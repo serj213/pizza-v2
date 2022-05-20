@@ -3,6 +3,10 @@
 .categories {
   ul {
     display: flex;
+    overflow-x: auto;
+    @media (max-width: 1300px) {
+      margin-bottom: 15px;
+    }
 
     li {
       background-color: #f9f9f9;
