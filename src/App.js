@@ -9,12 +9,14 @@ import Basket from './Components/Basket';
 import './assets/scss/app.scss';
 
 const App = () => {
+  const [searchValue, setSearchValue] = React.useState('');
+
   return (
     <Router>
       <div className="wrapper">
-        <Header />
+        <Header searchValue={searchValue} setSearchValue={setSearchValue} />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home searchValue={searchValue} />} />
           <Route path="basket" element={<Basket />} />
         </Routes>
       </div>

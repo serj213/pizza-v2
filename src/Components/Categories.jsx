@@ -1,7 +1,14 @@
 import React from 'react';
 
 const Categories = ({ activeCategoria, setActiveCategoria }) => {
-  const categories = ['Все', 'Мясные', 'Вегетарианская', 'Гриль', 'Острые', 'Закрытые'];
+  const categories = [
+    { name: 'Все', categorId: 0 },
+    { name: 'Мясные', categorId: 1 },
+    { name: 'Вегетарианская', categorId: 2 },
+    { name: 'Гриль', categorId: 3 },
+    { name: 'Острые', categorId: 4 },
+    { name: 'Закрытые', categorId: 5 },
+  ];
 
   const changeActiveCategory = (index) => {
     setActiveCategoria(index);
@@ -14,9 +21,9 @@ const Categories = ({ activeCategoria, setActiveCategoria }) => {
           return (
             <li
               key={index}
-              onClick={() => changeActiveCategory(index)}
-              className={activeCategoria === index ? 'active' : ''}>
-              {categor}
+              onClick={() => changeActiveCategory(categor)}
+              className={activeCategoria.categorId === categor.categorId ? 'active' : ''}>
+              {categor.name}
             </li>
           );
         })}

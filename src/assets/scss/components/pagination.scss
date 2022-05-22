@@ -1,0 +1,49 @@
+@import "../variables.scss";
+
+.pagination {
+    display: flex;
+    margin-top: 40px;
+    justify-content: center;
+
+    li {
+        a {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #000;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            @media (any-hover: hover) {
+                &:hover {
+                    background-color: $orange;
+                    color: #fff;
+                    border-color: transparent;
+                }
+            }
+        }
+    }
+
+    li.selected {
+        a {
+            background-color: $orange;
+            color: #fff;
+            border-color: transparent;
+        }
+    }
+
+    li + li {
+        margin-left: 15px;
+    }
+
+    .break {
+        a {
+            border: none;
+            &:hover {
+                background-color: transparent;
+                color: #000;
+            }
+        }
+    }
+}

@@ -45,4 +45,22 @@
       }
     }
   }
+
+  &__search {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border-color: rgba(#000, 0.5);
+    font-size: 18px;
+    transition: border-color 0.3s linear;
+    margin-right: auto;
+    margin-left: 30px;
+
+    &::placeholder {
+      color: rgba(#000, 0.5);
+    }
+
+    &:focus {
+      border-color: #000;
+    }
+  }
 }
