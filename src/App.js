@@ -1,9 +1,6 @@
 import React from 'react';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { useSelector, useDispatch } from 'react-redux';
-import { incrementByAmount, decrementByAmount } from './redux/slices/calculateSlice';
 
 import Home from './Pages/Home';
 import Header from './Components/Header';

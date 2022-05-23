@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import calculateSlice from './slices/calculateSlice';
+import filterSlice from './slices/filterSlice';
 
 export const store = configureStore({
-  reducer: { calculate: calculateSlice },
+  reducer: {
+    filters: filterSlice,
+  },
 });
