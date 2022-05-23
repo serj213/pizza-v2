@@ -9,6 +9,7 @@ const initialState = {
     name: 'Популярности',
     sortProperty: 'rating',
   },
+  currentPage: 1,
 };
 
 const filterSlice = createSlice({
@@ -21,9 +22,13 @@ const filterSlice = createSlice({
     setSortBy(state, action) {
       state.sortBy = action.payload;
     },
+
+    setCurrentPage(state, action) {
+      state.currentPage = action.payload;
+    },
   },
 });
 
-export const { setCategory, setSortBy } = filterSlice.actions;
+export const { setCategory, setSortBy, setCurrentPage } = filterSlice.actions;
 
 export default filterSlice.reducer;

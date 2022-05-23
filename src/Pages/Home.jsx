@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
 
 import { setCategory, setSortBy } from '../redux/slices/filterSlice';
 
@@ -13,9 +14,8 @@ import Pagination from '../Components/Pagination';
 const Home = ({ searchValue }) => {
   const [dataPizza, setDataPizza] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [currentPage, setCurrentPage] = React.useState(1);
 
-  const { categoria, sortBy } = useSelector((state) => state.filters);
+  const { categoria, sortBy, currentPage } = useSelector((state) => state.filters);
   const dispatch = useDispatch();
 
   const changeCategory = (obj) => {
@@ -34,14 +34,12 @@ const Home = ({ searchValue }) => {
     const order = sortBy.sortProperty.includes('-') ? 'asc' : 'desc';
     const limit = 3;
 
-    fetch(
-      `https://6287dd3f7864d2883e8e1808.mockapi.io/serj/pizzas${category}&page=${currentPage}&limit=${limit}&sortby=${sort}&order=${order}`,
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((json) => {
-        setDataPizza(json);
+    axios
+      .get(
+        `https://6287dd3f7864d2883e8e1808.mockapi.io/serj/pizzas${category}&page=${currentPage}&limit=${limit}&sortby=${sort}&order=${order}`,
+      )
+      .then(({ data }) => {
+        setDataPizza(data);
         setIsLoading(true);
       });
   }, [categoria, sortBy, currentPage]);
@@ -68,7 +66,7 @@ const Home = ({ searchValue }) => {
         </h2>
         <div className="content__items">{isLoading ? pizzas : skeleton}</div>
 
-        <Pagination changePage={setCurrentPage} />
+        <Pagination currentPage={currentPage} />
       </div>
     </div>
   );

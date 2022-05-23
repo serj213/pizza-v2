@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import Search from './Search';
+
 import logo from '../assets/img/pizza-logo.svg';
 
 const Header = ({ searchValue, setSearchValue }) => {
@@ -15,13 +17,7 @@ const Header = ({ searchValue, setSearchValue }) => {
           </div>
         </Link>
 
-        <input
-          type="text"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-          placeholder="Поиск по сайту"
-          className="header__search"
-        />
+        <Search searchValue={searchValue} changeInput={setSearchValue} />
 
         <div className="header__cart">
           <Link to="basket" className="button button--cart">
