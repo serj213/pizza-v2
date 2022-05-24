@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import axios from 'axios';
+import qs from 'qs';
+import { useNavigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
-
 import { setCategory, setSortBy } from '../redux/slices/filterSlice';
 
 import Categories from '../Components/Categories';
@@ -14,6 +15,7 @@ import Pagination from '../Components/Pagination';
 const Home = ({ searchValue }) => {
   const [dataPizza, setDataPizza] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
+  const navigate = useNavigate();
 
   const { categoria, sortBy, currentPage } = useSelector((state) => state.filters);
   const dispatch = useDispatch();
@@ -42,6 +44,18 @@ const Home = ({ searchValue }) => {
         setDataPizza(data);
         setIsLoading(true);
       });
+  }, [categoria, sortBy, currentPage]);
+
+  useEffect(() => {
+    const params = {
+      categoria: categoria.categorId ? categoria.categorId : null,
+      sortBy: sortBy.sortProperty,
+      currentPage,
+    };
+    // console.log(params);
+    const url = qs.stringify(params, { skipNulls: true });
+
+    navigate(`..//?${url}`);
   }, [categoria, sortBy, currentPage]);
 
   const pizzas = dataPizza
