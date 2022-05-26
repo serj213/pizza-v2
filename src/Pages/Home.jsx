@@ -4,18 +4,20 @@ import qs from 'qs';
 import { useNavigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategory, setSortBy } from '../redux/slices/filterSlice';
+import { setCategory, setSortBy, getParamsUrl } from '../redux/slices/filterSlice';
 
 import Categories from '../Components/Categories';
 import Sort from '../Components/Sort';
 import PizzaBlock from '../Components/PizzaBlock';
 import PizzaBlockLoader from '../Components/PizzaBlock/PizzaBlockLoader';
 import Pagination from '../Components/Pagination';
+import { sortData } from '../Components/Sort';
 
 const Home = ({ searchValue }) => {
   const [dataPizza, setDataPizza] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const navigate = useNavigate();
+  const isMounted = React.useRef(false);
 
   const { categoria, sortBy, currentPage } = useSelector((state) => state.filters);
   const dispatch = useDispatch();
@@ -47,16 +49,34 @@ const Home = ({ searchValue }) => {
   }, [categoria, sortBy, currentPage]);
 
   useEffect(() => {
-    const params = {
-      categoria: categoria.categorId ? categoria.categorId : null,
-      sortBy: sortBy.sortProperty,
-      currentPage,
-    };
-    // console.log(params);
-    const url = qs.stringify(params, { skipNulls: true });
+    if (isMounted.current) {
+      const params = {
+        categoria: categoria.categorId > 0 ? categoria.categorId : null,
+        sortBy: sortBy.sortProperty,
+        currentPage,
+      };
 
-    navigate(`..//?${url}`);
+      const url = qs.stringify(params, { skipNulls: true });
+
+      navigate(`..//?${url}`);
+    }
   }, [categoria, sortBy, currentPage]);
+
+  useEffect(() => {
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+
+      const sortUrl = sortData.find((sort) => sort.sortProperty === params.sortBy);
+
+      if (sortUrl) {
+        params.sortBy = sortUrl;
+      }
+
+      dispatch(getParamsUrl(params));
+    }
+
+    isMounted.current = true;
+  }, []);
 
   const pizzas = dataPizza
     .filter(({ name }) => name.toLowerCase().includes(searchValue.toLowerCase()))

@@ -1,14 +1,26 @@
 import React from 'react';
 
-const Sort = ({ activeSort, setActiveSort }) => {
-  const sortData = [
-    { name: 'Популярности', sortProperty: 'rating' },
-    { name: 'Цене (убываение)', sortProperty: 'price' },
-    { name: 'Цене (Возрастание)', sortProperty: '-price' },
-    { name: 'Алфавиту', sortProperty: 'alphabet' },
-  ];
+export const sortData = [
+  { name: 'Популярности', sortProperty: 'rating' },
+  { name: 'Цене (убываение)', sortProperty: 'price' },
+  { name: 'Цене (Возрастание)', sortProperty: '-price' },
+  { name: 'Алфавиту', sortProperty: 'alphabet' },
+];
 
+const Sort = ({ activeSort, setActiveSort }) => {
   const [visibleSort, setVisibleSort] = React.useState(false);
+  const sortRef = React.useRef();
+
+  React.useEffect(() => {
+    const outsideClick = (e) => {
+      if (!e.path.includes(sortRef.current)) {
+        setVisibleSort(false);
+      }
+    };
+    document.body.addEventListener('click', outsideClick);
+
+    return () => document.body.removeEventListener('click', outsideClick);
+  }, []);
 
   const changeSort = (index) => {
     setActiveSort(index);
@@ -16,7 +28,7 @@ const Sort = ({ activeSort, setActiveSort }) => {
   };
 
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
