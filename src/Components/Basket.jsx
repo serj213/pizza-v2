@@ -2,6 +2,7 @@ import React from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { clearProduct } from '../redux/slices/basketSlice';
+import { Link } from 'react-router-dom';
 
 import BasketCart from './BasketCart';
 import BasketEmpty from './BasketEmpty';
@@ -113,7 +114,7 @@ const Basket = () => {
               </span>
             </div>
             <div className="cart__bottom-buttons">
-              <a href="/" className="button button--outline button--add go-back-btn">
+              <Link to="/" className="button button--outline button--add go-back-btn">
                 <svg
                   width="8"
                   height="14"
@@ -130,7 +131,7 @@ const Basket = () => {
                 </svg>
 
                 <span>Вернуться назад</span>
-              </a>
+              </Link>
               <div className="button pay-btn">
                 <span>Оплатить сейчас</span>
               </div>
