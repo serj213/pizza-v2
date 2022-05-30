@@ -9,6 +9,8 @@ import logo from '../assets/img/pizza-logo.svg';
 const Header = ({ searchValue, setSearchValue }) => {
   const { totalPrice, items } = useSelector(({ basket }) => basket);
 
+  const totalCount = items.reduce((sum, item) => item.count + sum, 0);
+
   return (
     <div className="header">
       <div className="container">
@@ -54,7 +56,7 @@ const Header = ({ searchValue, setSearchValue }) => {
                 strokeLinejoin="round"
               />
             </svg>
-            <span>{items.length}</span>
+            <span>{totalCount}</span>
           </Link>
         </div>
       </div>

@@ -1,10 +1,14 @@
 import React from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { addProduct } from '../../redux/slices/basketSlice';
 
 const PizzaBlock = ({ id, name, img, price, types, size }) => {
+  const cart = useSelector((state) => state.basket.items.find((item) => item.id === id));
+
+  const count = cart ? cart.count : 0;
+
   const dispatch = useDispatch();
   const typeName = ['Тонкое', 'Толстое'];
   const [sizePizza, setSizePizza] = React.useState(0);
@@ -16,8 +20,8 @@ const PizzaBlock = ({ id, name, img, price, types, size }) => {
       name,
       img,
       price,
-      type: typePizza,
-      size: sizePizza,
+      type: typeName[typePizza],
+      size: size[sizePizza],
     };
 
     dispatch(addProduct(obj));
@@ -71,7 +75,7 @@ const PizzaBlock = ({ id, name, img, price, types, size }) => {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          {count > 0 && <i>{count}</i>}
         </div>
       </div>
     </div>
