@@ -101,10 +101,21 @@ const Home = ({ searchValue }) => {
           <Categories setActiveCategoria={changeCategory} activeCategoria={categoria} />
           <Sort setActiveSort={changeSortBy} activeSort={sortBy} />
         </div>
-        <h2 className="content__title">
-          {categoria.categorId === 0 ? categoria.name + ' пиццы' : categoria.name}
-        </h2>
-        <div className="content__items">{status === 'success' ? pizzas : skeleton}</div>
+
+        {status === 'rejected' ? (
+          <div>
+            Ошибка при получении пицц,
+            <br /> попробуйте позже
+          </div>
+        ) : (
+          <>
+            <h2 className="content__title">
+              {categoria.categorId === 0 ? categoria.name + ' пиццы' : categoria.name}
+            </h2>
+
+            <div className="content__items">{status === 'success' ? pizzas : skeleton}</div>
+          </>
+        )}
 
         <Pagination currentPage={currentPage} />
       </div>
