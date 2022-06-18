@@ -3,7 +3,11 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
 const FullPizza = () => {
-  const [pizza, setPizza] = React.useState();
+  const [pizza, setPizza] = React.useState<{
+    img: string;
+    name: string;
+    price: number;
+  }>();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -12,7 +16,7 @@ const FullPizza = () => {
       console.log('dfdfdfdf');
       try {
         const { data } = await axios.get(
-          'https://-6287dd3f7864d2883e8e1808.mockapi.io/serj/pizzas/' + id,
+          'https://6287dd3f7864d2883e8e1808.mockapi.io/serj/pizzas/' + id,
         );
 
         setPizza(data);
