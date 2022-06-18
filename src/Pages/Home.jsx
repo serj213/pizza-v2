@@ -83,12 +83,18 @@ const Home = ({ searchValue }) => {
   }, []);
 
   const pizzas =
-    items.length > 0 &&
+    items.length > 0 ?
     items
       .filter(({ name }) => name.toLowerCase().includes(searchValue.toLowerCase()))
       .map((pizza) => {
         return <PizzaBlock key={pizza.id} {...pizza} />;
-      });
+      })
+
+      :
+
+      <div>
+        К сожалению больше нет пицц
+      </div>
 
   const skeleton = [...new Array(6)].map((item, index) => {
     return <PizzaBlockLoader key={index} />;
