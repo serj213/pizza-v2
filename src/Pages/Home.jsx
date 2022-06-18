@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import qs from 'qs';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategory, setSortBy, getParamsUrl } from '../redux/slices/filterSlice';
@@ -83,18 +83,19 @@ const Home = ({ searchValue }) => {
   }, []);
 
   const pizzas =
-    items.length > 0 ?
-    items
-      .filter(({ name }) => name.toLowerCase().includes(searchValue.toLowerCase()))
-      .map((pizza) => {
-        return <PizzaBlock key={pizza.id} {...pizza} />;
-      })
-
-      :
-
-      <div>
-        К сожалению больше нет пицц
-      </div>
+    items.length > 0 ? (
+      items
+        .filter(({ name }) => name.toLowerCase().includes(searchValue.toLowerCase()))
+        .map((pizza) => {
+          return (
+            <Link key={pizza.id} to={`pizzas/${pizza.id}`}>
+              <PizzaBlock {...pizza} />
+            </Link>
+          );
+        })
+    ) : (
+      <div>К сожалению больше нет пицц</div>
+    );
 
   const skeleton = [...new Array(6)].map((item, index) => {
     return <PizzaBlockLoader key={index} />;
