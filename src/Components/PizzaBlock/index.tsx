@@ -4,8 +4,17 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addProduct } from '../../redux/slices/basketSlice';
 
-const PizzaBlock = ({ id, name, img, price, types, size }) => {
-  const cart = useSelector((state) => state.basket.items.find((item) => item.id === id));
+type pizzaBlockProps = {
+  id: string;
+  name: string;
+  img: string;
+  price: number;
+  types: number[];
+  size: number[];
+};
+
+const PizzaBlock: React.FC<pizzaBlockProps> = ({ id, name, img, price, types, size }) => {
+  const cart = useSelector((state: any) => state.basket.items.find((item: any) => item.id === id));
 
   const count = cart ? cart.count : 0;
 

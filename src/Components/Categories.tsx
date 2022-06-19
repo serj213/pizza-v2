@@ -1,6 +1,13 @@
 import React from 'react';
 
-const Categories = ({ activeCategoria, setActiveCategoria }) => {
+type CategoriesProps = {
+  activeCategoria: { name: string; categorId: number };
+  setActiveCategoria: any;
+};
+
+const Categories: React.FC<CategoriesProps> = ({ activeCategoria, setActiveCategoria }) => {
+  console.log({ activeCategoria, setActiveCategoria });
+
   const categories = [
     { name: 'Все', categorId: 0 },
     { name: 'Мясные', categorId: 1 },
@@ -10,14 +17,14 @@ const Categories = ({ activeCategoria, setActiveCategoria }) => {
     { name: 'Закрытые', categorId: 5 },
   ];
 
-  const changeActiveCategory = (index) => {
+  const changeActiveCategory = (index: number) => {
     setActiveCategoria(index);
   };
 
   return (
     <div className="categories">
       <ul>
-        {categories.map((categor, index) => {
+        {categories.map((categor: any, index: number) => {
           return (
             <li
               key={index}

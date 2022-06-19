@@ -4,9 +4,23 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { addProduct, onMinusCount, removeProduct } from '../redux/slices/basketSlice';
 
-const BasketCart = ({ id, name, img, count, size, type, price }) => {
+type basketCartProps = {
+  id: string;
+  name: string;
+  img: string;
+  count: number;
+  size: number;
+  type: string;
+  price: number;
+};
+
+const BasketCart: React.FC<basketCartProps> = ({ id, name, img, count, size, type, price }) => {
+  console.log({ id, name, img, count, size, type, price });
+
   const dispatch = useDispatch();
-  const findPizza = useSelector(({ basket }) => basket.items.find((item) => item.id === id));
+  const findPizza = useSelector(({ basket }: any) =>
+    basket.items.find((item: any) => item.id === id),
+  );
 
   const onPlusClick = () => {
     dispatch(addProduct({ id }));

@@ -7,11 +7,11 @@ import { Link } from 'react-router-dom';
 import BasketCart from './BasketCart';
 import BasketEmpty from './BasketEmpty';
 
-const Basket = () => {
-  const { items, totalPrice } = useSelector(({ basket }) => basket);
+const Basket: React.FC = () => {
+  const { items, totalPrice } = useSelector(({ basket }: any) => basket);
   const dispatch = useDispatch();
 
-  const totalCount = items.reduce((sum, item) => sum + item.count, 0);
+  const totalCount = items.reduce((sum: number, item: any) => sum + item.count, 0);
 
   const onClearBasket = () => {
     dispatch(clearProduct());
@@ -98,7 +98,7 @@ const Basket = () => {
             </div>
           </div>
           <div className="content__items">
-            {items.map((item) => {
+            {items.map((item: any) => {
               return <BasketCart key={item.id} {...item} />;
             })}
           </div>

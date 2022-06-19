@@ -6,10 +6,12 @@ import Search from './Search';
 
 import logo from '../assets/img/pizza-logo.svg';
 
-const Header = ({ searchValue, setSearchValue }) => {
-  const { totalPrice, items } = useSelector(({ basket }) => basket);
+type headerProps = { searchValue: string; setSearchValue: any };
 
-  const totalCount = items.reduce((sum, item) => item.count + sum, 0);
+const Header: React.FC<headerProps> = ({ searchValue, setSearchValue }) => {
+  const { totalPrice, items } = useSelector(({ basket }: any) => basket);
+
+  const totalCount = items.reduce((sum: number, item: any) => item.count + sum, 0);
 
   return (
     <div className="header">

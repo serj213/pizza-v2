@@ -7,12 +7,16 @@ export const sortData = [
   { name: 'Алфавиту', sortProperty: 'alphabet' },
 ];
 
-const Sort = ({ activeSort, setActiveSort }) => {
+type sortProps = { activeSort: { name: string; sortProperty: string }; setActiveSort: any };
+
+const Sort: React.FC<sortProps> = ({ activeSort, setActiveSort }) => {
+  console.log({ activeSort, setActiveSort });
+
   const [visibleSort, setVisibleSort] = React.useState(false);
-  const sortRef = React.useRef();
+  const sortRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const outsideClick = (e) => {
+    const outsideClick = (e: any) => {
       if (!e.path.includes(sortRef.current)) {
         setVisibleSort(false);
       }
@@ -22,7 +26,7 @@ const Sort = ({ activeSort, setActiveSort }) => {
     return () => document.body.removeEventListener('click', outsideClick);
   }, []);
 
-  const changeSort = (index) => {
+  const changeSort = (index: number) => {
     setActiveSort(index);
     setVisibleSort(false);
   };
@@ -48,7 +52,7 @@ const Sort = ({ activeSort, setActiveSort }) => {
       {visibleSort && (
         <div className="sort__popup">
           <ul>
-            {sortData.map((obj, index) => {
+            {sortData.map((obj: any, index: number) => {
               return (
                 <li
                   key={index}

@@ -1,6 +1,8 @@
 import React from 'react';
 
-const Search = ({ searchValue, changeInput }) => {
+type searchProps = { searchValue: string; changeInput: any };
+
+const Search: React.FC<searchProps> = ({ searchValue, changeInput }) => {
   return (
     <>
       <input

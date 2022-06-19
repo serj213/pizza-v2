@@ -14,20 +14,24 @@ import Pagination from '../Components/Pagination';
 import { sortData } from '../Components/Sort';
 import { fetchPizzas } from '../redux/slices/pizzaSlice';
 
-const Home = ({ searchValue }) => {
+type homeProps = {
+  searchValue: string;
+};
+
+const Home: React.FC<homeProps> = ({ searchValue }) => {
   const navigate = useNavigate();
   const isMounted = React.useRef(false);
 
-  const { categoria, sortBy, currentPage } = useSelector((state) => state.filters);
+  const { categoria, sortBy, currentPage } = useSelector((state: any) => state.filters);
 
-  const { items, status } = useSelector((state) => state.pizzas);
+  const { items, status } = useSelector((state: any) => state.pizzas);
   const dispatch = useDispatch();
 
-  const changeCategory = (obj) => {
+  const changeCategory = (obj: any) => {
     dispatch(setCategory(obj));
   };
 
-  const changeSortBy = (obj) => {
+  const changeSortBy = (obj: any) => {
     dispatch(setSortBy(obj));
   };
 
@@ -38,6 +42,7 @@ const Home = ({ searchValue }) => {
     const limit = 3;
 
     dispatch(
+      // @ts-ignore
       fetchPizzas({
         category,
         sort,
@@ -85,8 +90,8 @@ const Home = ({ searchValue }) => {
   const pizzas =
     items.length > 0 ? (
       items
-        .filter(({ name }) => name.toLowerCase().includes(searchValue.toLowerCase()))
-        .map((pizza) => {
+        .filter(({ name }: any) => name.toLowerCase().includes(searchValue.toLowerCase()))
+        .map((pizza: any) => {
           return (
             <Link key={pizza.id} to={`pizzas/${pizza.id}`}>
               <PizzaBlock {...pizza} />
