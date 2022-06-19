@@ -1,6 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { basketCartProps } from '../../Components/BasketCart';
 
-const initialState = {
+interface basketSliceState {
+  items: basketCartProps[];
+  totalPrice: number;
+  totalCount: number;
+}
+
+const initialState: basketSliceState = {
   items: [],
   totalPrice: 0,
   totalCount: 0,
@@ -10,22 +17,16 @@ const basketSlice = createSlice({
   name: 'basket',
   initialState,
   reducers: {
-    addProduct(state, action) {
-      const findObj = state.items.find((obj) => obj.id === action.payload.id);
+    addProduct(state, action: PayloadAction<string>) {
+      const findObj = state.items.find((obj) => obj.id === action.payload);
 
       if (findObj) {
-        console.log(findObj);
         findObj.count++;
-      } else {
-        state.items.push({
-          ...action.payload,
-          count: 1,
-        });
       }
       state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0);
     },
 
-    onMinusCount(state, action) {
+    onMinusCount(state, action: PayloadAction<string>) {
       const findObj = state.items.find((obj) => obj.id === action.payload);
 
       if (findObj) {
@@ -34,7 +35,7 @@ const basketSlice = createSlice({
       }
     },
 
-    removeProduct(state, action) {
+    removeProduct(state, action: PayloadAction<string>) {
       state.items = state.items.filter((obj) => obj.id !== action.payload);
       state.totalPrice = state.items.reduce((sum, obj) => obj.price * obj.count + sum, 0);
     },

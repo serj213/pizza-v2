@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import axios from 'axios';
 import qs from 'qs';
 import { useNavigate, Link } from 'react-router-dom';
 
@@ -12,7 +11,7 @@ import PizzaBlock from '../Components/PizzaBlock';
 import PizzaBlockLoader from '../Components/PizzaBlock/PizzaBlockLoader';
 import Pagination from '../Components/Pagination';
 import { sortData } from '../Components/Sort';
-import { fetchPizzas } from '../redux/slices/pizzaSlice';
+import { fetchPizzas, Status } from '../redux/slices/pizzaSlice';
 
 type homeProps = {
   searchValue: string;
@@ -42,7 +41,6 @@ const Home: React.FC<homeProps> = ({ searchValue }) => {
     const limit = 3;
 
     dispatch(
-      // @ts-ignore
       fetchPizzas({
         category,
         sort,
@@ -114,7 +112,7 @@ const Home: React.FC<homeProps> = ({ searchValue }) => {
           <Sort setActiveSort={changeSortBy} activeSort={sortBy} />
         </div>
 
-        {status === 'rejected' ? (
+        {status === Status.REJECTED ? (
           <div>
             Ошибка при получении пицц,
             <br /> попробуйте позже
@@ -125,7 +123,7 @@ const Home: React.FC<homeProps> = ({ searchValue }) => {
               {categoria.categorId === 0 ? categoria.name + ' пиццы' : categoria.name}
             </h2>
 
-            <div className="content__items">{status === 'success' ? pizzas : skeleton}</div>
+            <div className="content__items">{status === Status.SUCCESS ? pizzas : skeleton}</div>
           </>
         )}
 

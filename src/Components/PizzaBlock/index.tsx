@@ -33,7 +33,7 @@ const PizzaBlock: React.FC<pizzaBlockProps> = ({ id, name, img, price, types, si
       size: size[sizePizza],
     };
 
-    dispatch(addProduct(obj));
+    dispatch(addProduct(obj.id));
   };
 
   return (
@@ -52,9 +52,6 @@ const PizzaBlock: React.FC<pizzaBlockProps> = ({ id, name, img, price, types, si
               </li>
             );
           })}
-
-          {/* <li className="active">тонкое</li>
-                <li>традиционное</li> */}
         </ul>
         <ul>
           {size.map((item, index) => {

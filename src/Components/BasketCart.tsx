@@ -3,8 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addProduct, onMinusCount, removeProduct } from '../redux/slices/basketSlice';
-
-type basketCartProps = {
+export type basketCartProps = {
   id: string;
   name: string;
   img: string;
@@ -23,7 +22,7 @@ const BasketCart: React.FC<basketCartProps> = ({ id, name, img, count, size, typ
   );
 
   const onPlusClick = () => {
-    dispatch(addProduct({ id }));
+    dispatch(addProduct(id));
   };
 
   const onMinusClick = () => {
