@@ -7,17 +7,18 @@ export const sortData = [
   { name: 'Алфавиту', sortProperty: 'alphabet' },
 ];
 
-type sortProps = { activeSort: { name: string; sortProperty: string }; setActiveSort: any };
+type sortProps = {
+  activeSort: { name: string; sortProperty: string };
+  setActiveSort: (index: number) => void;
+};
 
 const Sort: React.FC<sortProps> = ({ activeSort, setActiveSort }) => {
-  console.log({ activeSort, setActiveSort });
-
   const [visibleSort, setVisibleSort] = React.useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
-    const outsideClick = (e: any) => {
-      if (!e.path.includes(sortRef.current)) {
+    const outsideClick = (e: MouseEvent) => {
+      if (sortRef.current && !e.composedPath().includes(sortRef.current)) {
         setVisibleSort(false);
       }
     };

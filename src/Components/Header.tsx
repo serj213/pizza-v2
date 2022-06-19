@@ -6,7 +6,7 @@ import Search from './Search';
 
 import logo from '../assets/img/pizza-logo.svg';
 
-type headerProps = { searchValue: string; setSearchValue: any };
+type headerProps = { searchValue: string; setSearchValue: (value: string) => void };
 
 const Header: React.FC<headerProps> = ({ searchValue, setSearchValue }) => {
   const { totalPrice, items } = useSelector(({ basket }: any) => basket);
