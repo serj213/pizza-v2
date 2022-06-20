@@ -1,8 +1,9 @@
 import React from 'react';
+import { categoria } from '../redux/slices/filterSlice';
 
 type CategoriesProps = {
-  activeCategoria: { name: string; categorId: number };
-  setActiveCategoria: (index: number) => void;
+  activeCategoria: categoria;
+  setActiveCategoria: (index: categoria) => void;
 };
 
 const Categories: React.FC<CategoriesProps> = ({ activeCategoria, setActiveCategoria }) => {
@@ -15,7 +16,7 @@ const Categories: React.FC<CategoriesProps> = ({ activeCategoria, setActiveCateg
     { name: 'Закрытые', categorId: 5 },
   ];
 
-  const changeActiveCategory = (index: number) => {
+  const changeActiveCategory = (index: categoria) => {
     setActiveCategoria(index);
   };
 

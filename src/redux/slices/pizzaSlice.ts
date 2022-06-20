@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
-type paramsFilterUrl = {
+export type paramsFilterUrl = {
   category: string;
   sort: string;
   order: string;
@@ -13,6 +13,7 @@ export type pizzaType = {
   category: number;
   id: string;
   name: string;
+  img: string;
   price: number;
   rating: number;
   size: number[];

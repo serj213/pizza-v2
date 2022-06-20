@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import qs from 'qs';
 import { useNavigate, Link } from 'react-router-dom';
-
+import { useAppDispatch } from '../redux/store';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategory, setSortBy, getParamsUrl } from '../redux/slices/filterSlice';
 
@@ -12,6 +12,8 @@ import PizzaBlockLoader from '../Components/PizzaBlock/PizzaBlockLoader';
 import Pagination from '../Components/Pagination';
 import { sortData } from '../Components/Sort';
 import { fetchPizzas, Status } from '../redux/slices/pizzaSlice';
+import { RootState } from '../redux/store';
+import { categoria, sort } from '../redux/slices/filterSlice';
 
 type homeProps = {
   searchValue: string;
@@ -21,12 +23,12 @@ const Home: React.FC<homeProps> = ({ searchValue }) => {
   const navigate = useNavigate();
   const isMounted = React.useRef(false);
 
-  const { categoria, sortBy, currentPage } = useSelector((state: any) => state.filters);
+  const { categoria, sortBy, currentPage } = useSelector((state: RootState) => state.filters);
 
-  const { items, status } = useSelector((state: any) => state.pizzas);
-  const dispatch = useDispatch();
+  const { items, status } = useSelector((state: RootState) => state.pizzas);
+  const dispatch = useAppDispatch();
 
-  const changeCategory = (obj: any) => {
+  const changeCategory = (obj: categoria) => {
     dispatch(setCategory(obj));
   };
 
@@ -88,13 +90,9 @@ const Home: React.FC<homeProps> = ({ searchValue }) => {
   const pizzas =
     items.length > 0 ? (
       items
-        .filter(({ name }: any) => name.toLowerCase().includes(searchValue.toLowerCase()))
-        .map((pizza: any) => {
-          return (
-            <Link key={pizza.id} to={`pizzas/${pizza.id}`}>
-              <PizzaBlock {...pizza} />
-            </Link>
-          );
+        .filter(({ name }) => name.toLowerCase().includes(searchValue.toLowerCase()))
+        .map((pizza) => {
+          return <PizzaBlock key={pizza.id} {...pizza} />;
         })
     ) : (
       <div>К сожалению больше нет пицц</div>

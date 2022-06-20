@@ -1,6 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const initialState = {
+export type categoria = {
+  name: string;
+  categorId: number;
+};
+
+export type sort = {
+  name: string;
+  sortProperty: string;
+};
+
+type getParamsUrlType = {
+  categorId: number;
+  categoria: string;
+  sortBy: sort;
+  currentPage: number;
+};
+
+interface filterSliceType {
+  categoria: categoria;
+  sortBy: sort;
+  currentPage: number;
+}
+
+const initialState: filterSliceType = {
   categoria: {
     name: 'Все',
     categorId: 0,
@@ -16,18 +39,18 @@ const filterSlice = createSlice({
   name: 'filter',
   initialState,
   reducers: {
-    setCategory(state, action) {
+    setCategory(state, action: PayloadAction<any>) {
       state.categoria = action.payload;
     },
-    setSortBy(state, action) {
+    setSortBy(state, action: PayloadAction<sort>) {
       state.sortBy = action.payload;
     },
 
-    setCurrentPage(state, action) {
+    setCurrentPage(state, action: PayloadAction<number>) {
       state.currentPage = action.payload;
     },
 
-    getParamsUrl(state, action) {
+    getParamsUrl(state, action: PayloadAction<any>) {
       state.categoria.categorId = action.payload.categoria
         ? Number(action.payload.categoria)
         : state.categoria.categorId;

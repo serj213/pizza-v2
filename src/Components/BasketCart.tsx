@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 
 import { addProduct, onMinusCount, removeProduct } from '../redux/slices/basketSlice';
 export type basketCartProps = {
@@ -17,7 +18,7 @@ const BasketCart: React.FC<basketCartProps> = ({ id, name, img, count, size, typ
   console.log({ id, name, img, count, size, type, price });
 
   const dispatch = useDispatch();
-  const findPizza = useSelector(({ basket }: any) =>
+  const findPizza = useSelector(({ basket }: RootState) =>
     basket.items.find((item: any) => item.id === id),
   );
 
